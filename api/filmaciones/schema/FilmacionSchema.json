@@ -1,0 +1,60 @@
+{
+    "type": "object",
+    "properties": {
+        
+              
+        "titulo": {
+            "description": "Título",
+            "type": "string"
+        },
+        "rastreo_apertura": {
+            "description": "Datos de rastreo de apertura",
+            "type": "string"
+        },
+        "director": {
+            "description": "Director",
+            "type": "string"
+        },
+        "productor": {
+            "description": "productor",
+            "type": "string"
+        },
+        "fecha_lanzamiento": {
+            "description": "fecha de lanzamiento",
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "personajes": {
+            "description": "Personajes",
+            "type": "array"
+        },
+        "planetas": {
+            "description": "Planetas",
+            "type": "array"
+        },
+        "naves": {
+            "description": "Naves",
+            "type": "array"
+        },
+        "vehiculos": {
+            "description": "Vehiculos",
+            "type": "array"
+        },
+        "especies": {
+            "description": "Especies",
+            "type": "array"
+        },
+        "link": {
+            "description": "Link",
+            "type": "string"
+        }
+    },
+    "required": [
+        "titulo",
+        "rastreo_apertura",
+        "director",
+        "productor",
+        "fecha_lanzamiento",
+        "link"
+    ]
+}

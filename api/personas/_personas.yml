@@ -1,0 +1,7 @@
+v1-list-persona:
+  handler: api/personas/controller/persona-list.listar
+  events:
+    - http:
+        path: v1/personas
+        method: get
+        cors: true

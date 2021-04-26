@@ -1,0 +1,114 @@
+# Welcome to serverless. Read the docs
+# https://serverless.com/framework/docs/
+
+# Serverless.yml is the configuration the CLI
+# uses to deploy your code to your provider of choice
+
+# The `service` block is the name of the service
+service: awsproject
+
+#frameworkVersion: '2'
+
+# The `provider` block defines where your service will be deployed
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: us-west-2
+  tracing:
+    lambda: true
+  stage: dev
+  environment: ${file(devops/config/env/dev.yml)}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource:
+        - 'arn:aws:dynamodb:us-west-2:*:table/tabla-filmacion'
+# The `functions` block defines what code to deploy
+functions:
+  #helloWorld:
+  #  handler: handler.helloWorld
+  #  # The `events` block defines how to trigger the handler.helloWorld code
+  #  events:
+  #    - http:
+  #        path: hello-world
+  #        method: get
+  #        cors: true
+  - ${file(api/filmaciones/_filmaciones.yml)}
+  - ${file(api/personas/_personas.yml)}
+dynamodb:
+  start:
+    port: 8000
+    inMemory: true
+    seed: true
+    convertEmptyValues: true
+    # migration:
+    #   dir: offline/migrations
+    # seed:
+    #   domain:
+    #     sources: ${file(offline/seeds/_sources.yml)}
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
+  - serverless-dynamodb-local
+
+resources:
+  Resources:
+    FilmacionDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: idPelicula
+            AttributeType: S
+          - AttributeName: idEpisodio
+            AttributeType: S
+        KeySchema:
+          - AttributeName: idPelicula
+            KeyType: HASH
+          - AttributeName: idEpisodio
+            KeyType: RANGE
+        BillingMode: PAY_PER_REQUEST
+        TableName: tabla-filmacion
+custom:
+  documentation:
+    api:
+      info:
+        version: "1" # see note above about this being ignored
+        title: "SWAPI INTEGRACION" # see note above about this being ignored
+        description: "Uso de API 'SWAPI'"
+        contact:
+          name: "JUAN PAUCAR"
+          email: "juanjpfue@outlook.com"
+        license:
+          name: "Licensing"
+          url: "#"
+      tags:
+        -
+          name: "Data Creation"
+          description: "Services to create things"
+        -
+          name: "Some other tag"
+          description: "A tag for other things"
+    authorizers:
+      -
+        name: "MyCustomAuthorizer"
+        description: "This is an error"
+    resources:
+      -
+        path: "v1/filmaciones/{idEpisodio}"
+        description: "Endpoint para obtener una filmación a través del ID"
+      -
+        path: "v1/filmaciones"
+        description: "Endpoint para listar todas las filmaciones"
+      -
+        path: "v1/filmaciones/registrar"
+        description: "Endpoint para registrar una filmación"
+      -
+        path: "v1/personas"
+        description: "Endpoint para listar personas del API SWAPI" 

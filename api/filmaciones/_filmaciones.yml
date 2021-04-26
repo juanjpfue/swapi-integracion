@@ -1,0 +1,25 @@
+v1-get-filmacion:
+  handler: api/filmaciones/controller/filmacion-get.obtener
+  events:
+    - http:
+        path: v1/filmaciones/{idEpisodio}
+        method: get
+        cors: true
+v1-get-all-filmacion:
+  handler: api/filmaciones/controller/filmacion-get.listar
+  events:
+    - http:
+        path: v1/filmaciones
+        method: get
+        cors: true
+        
+v1-post-filmacion:
+  x-lambda-name: postFilmacionSwagger
+  x-cors: true
+  handler: api/filmaciones/controller/filmacion-insert.crear
+  events:
+    - http:
+        path: v1/filmaciones/registrar
+        method: POST
+        cors: true
+

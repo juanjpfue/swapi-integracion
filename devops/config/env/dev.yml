@@ -1,0 +1,10 @@
+
+FILMACION_DYNAMODB_TABLE: tabla-filmacion
+
+#id de pelicula generado por defecto para el caso práctico.
+ID_PELICULA: bc4e6198-2eb1-4865-a7e7-1ae441d6241d
+
+
+URL_SWAPI: https://swapi.py4e.com/api
+
+URL_WEB_DESPLEGADO: http://localhost:3000/offline/v1

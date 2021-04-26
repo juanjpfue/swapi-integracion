@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "target": "es6",
+    "module": "commonjs",
+    "preserveConstEnums": true,
+    "strictNullChecks": true,
+    "sourceMap": true,
+    "allowJs": true,
+    "outDir": ".build",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "lib": [
+      "ES2016"
+    ],
+    "rootDir": "./"
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "types": [
+    "node",
+    "aws-sdk"
+  ]
+}
