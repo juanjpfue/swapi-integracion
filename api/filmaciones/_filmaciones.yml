@@ -14,8 +14,6 @@ v1-get-all-filmacion:
         cors: true
         
 v1-post-filmacion:
-  x-lambda-name: postFilmacionSwagger
-  x-cors: true
   handler: api/filmaciones/controller/filmacion-insert.crear
   events:
     - http:
